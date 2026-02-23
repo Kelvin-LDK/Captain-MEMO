@@ -1,31 +1,29 @@
 require('dotenv').config();
 const express = require('express');
 const http = require('http');
-const WebSocket = require('ws');
+const { initWebSocketServer } = require('./utils/websocket');
 
 const app = express();
 const server = http.createServer(app);
-const wss = new WebSocket.Server({ server });
+
+// 初始化 WebSocket 服务器（传入 server 实例）
+initWebSocketServer(server);
 
 // 静态文件服务
 app.use(express.static('public'));
 
+// 中间件：解析 JSON 请求体
+app.use(express.json());
+
 // 路由
 const activitiesRouter = require('./routes/activities');
+const merchantsRouter = require('./routes/merchants');
 app.use('/api/activities', activitiesRouter);
+app.use('/api/merchants', merchantsRouter);
 
 // 健康检查接口
 app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', time: new Date() });
-});
-
-// WebSocket 连接处理
-wss.on('connection', (ws) => {
-  console.log('Client connected');
-  ws.on('message', (message) => {
-    console.log('received:', message);
-  });
-  ws.send('Welcome to Captain MEMO!');
 });
 
 const PORT = process.env.PORT || 3000;
