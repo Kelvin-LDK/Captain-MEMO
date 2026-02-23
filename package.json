@@ -1,0 +1,25 @@
+{
+  "name": "captain-memo",
+  "version": "1.0.0",
+  "description": "Captain MEMO for My Friend whose nickname is sheep, and for the Memories we share.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^17.3.1",
+    "express": "^5.2.1",
+    "mysql2": "^3.17.4",
+    "redis": "^5.11.0",
+    "web-push": "^3.6.7",
+    "ws": "^8.19.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}
