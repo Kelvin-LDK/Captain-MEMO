@@ -10,6 +10,10 @@ const wss = new WebSocket.Server({ server });
 // 静态文件服务
 app.use(express.static('public'));
 
+// 路由
+const activitiesRouter = require('./routes/activities');
+app.use('/api/activities', activitiesRouter);
+
 // 健康检查接口
 app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', time: new Date() });
